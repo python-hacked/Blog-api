@@ -1,9 +1,8 @@
-# cmsapp/tests/test_serializers.py
 
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from .models import Post
-from .serializers import PostSerializer
+from .Serializers import PostSerializer
 
 class PostSerializerTest(APITestCase):
     def setUp(self):

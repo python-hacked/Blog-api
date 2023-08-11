@@ -17,15 +17,17 @@ class UserRegistration(generics.CreateAPIView):
         return response
 
 
+from rest_framework.permissions import IsAuthenticated
+
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsOwnerOrPublic]
+    permission_classes = [IsAuthenticated, IsOwnerOrPublic]
     message_success = "Post operation successful."
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-        serializer.context["message"] = self.message_success
+        serializer.context['message'] = self.message_success
 
     def perform_update(self, serializer):
         serializer.save()
